@@ -1,43 +1,46 @@
-<!DOCTYPE html>
 <%- include ('../../partials/head.ejs') %>
+    <%- include ('../../partials/navbar.ejs') %>
 
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h1>Criar novo artigo</h1>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="/admin/articles/save">
-                    <label for="cat-title">Título</label>
-                    <input class="form-control" id="cat-title" name="title" type="text">
-                    <br>
-                    <label for="body">Corpo do artigo</label>
-                    <textarea class="form-control" id="article" name="body" rows="25"></textarea>
-                    <br>
-                    <label for="selected-category">Categoria</label>
-                    <select class="form-control" name="category" id="">
-                        <option selected="selected">Selecione uma categoria</option>
-                        <% categories.forEach(category => { %>
-                            <option value="<%= category.id %>"><%= category.title %></option>
-                        <% }) %>
-                    </select>
-                    <br>
-                    <button class="btn btn-info">Cadastrar</button>
-                </form>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Criar novo artigo</h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/admin/articles/save">
+                        <label for="cat-title">Título</label>
+                        <input class="form-control" id="cat-title" name="title" type="text">
+                        <br>
+                        <label for="body">Corpo do artigo</label>
+                        <textarea class="form-control" id="article" name="body" rows="25"></textarea>
+                        <br>
+                        <label for="selected-category">Categoria</label>
+                        <select class="form-control" name="category" id="">
+                            <option selected="selected">Selecione uma categoria</option>
+                            <% categories.forEach(category=> { %>
+                                <option value="<%= category.id %>">
+                                    <%= category.title %>
+                                </option>
+                                <% }) %>
+                        </select>
+                        <br>
+                        <button class="btn btn-info">Cadastrar</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-<%- include ('../../partials/footer.ejs') %>
+        <%- include ('../../partials/footer.ejs') %>
 
-<!-- TinyMCE - Text Editor -->
-<script src="/js/tinymce/tinymce.min.js"></script>
-<script>
-    tinymce.init({
-        language: 'pt_BR',
-        selector: "#article",
-        plugins: [
-            `advlist
+            <!-- TinyMCE - Text Editor -->
+            <script src="/js/tinymce/tinymce.min.js"></script>
+            <script>
+                tinymce.init({
+                    language: 'pt_BR',
+                    selector: "#article",
+                    plugins: [
+                        `advlist
             autolink
             link
             image
@@ -54,6 +57,6 @@
             table
             paste
             emoticons`
-        ]
-    })
-</script>
+                    ]
+                })
+            </script>

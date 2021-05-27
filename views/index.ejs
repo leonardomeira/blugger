@@ -1,8 +1,24 @@
 <%- include ('partials/head.ejs') %>
+    <%- include ('partials/homeNavbar.ejs') %>
 
-    <div class="container">
-        <h1>Blugger</h1>
-    </div>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4">Blugger</h1>
+                <p class="lead">O portal de atigos aleatórios</p>
+            </div>
+            <% articles.forEach(article=> { %>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="display: flex; justify-content: space-between;">
+                            <%= article.title %>
+                                <a href="/<%= article.slug %>">Ler artigo >></a>
+                        </h3>
+                    </div>
+                </div>
+
+                <% }) %>
+        </div>
 
 
-    <%- include ('partials/footer.ejs') %>
+        <%- include ('partials/footer.ejs') %>

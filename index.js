@@ -15,7 +15,7 @@ app.set('view engine', 'ejs') // Setando a template engine
 app.use(express.static('public')) // Setando a pasta de arq. estáticos
 
 //Embedded express bodyparser
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 //Database
@@ -31,7 +31,30 @@ connection
 app.use('/', [categoriesController, articlesController])
 
 app.get('/', (req, res) => {
-    res.render('index')
+    Article.findAll({
+        order: [
+            ['id', 'DESC']
+        ]
+    }).then(articles => {
+        res.render('index', { articles: articles })
+    })
+})
+
+app.get("/:slug", (req, res) => {
+    let slug = req.params.slug
+    Article.findOne({
+        where: {
+            slug: slug
+        }
+    }).then(article => {
+        if (article != undefined) {
+            res.render('article', { article })
+        } else {
+            res.redirect('/')
+        }
+    }).catch(err => {
+        res.redirect('/')
+    })
 })
 
 app.listen(4000, () => {
