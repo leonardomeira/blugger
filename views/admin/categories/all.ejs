@@ -1,54 +1,54 @@
 <%- include ('../../partials/head.ejs') %>
-    <%- include ('../../partials/navbar.ejs') %>
+<%- include ('../../partials/navbar.ejs') %>
 
-        <div class="container">
-            <br>
-            <h1>Categorias</h1>
-            <br>
-            <a class="btn btn-info" href="/admin/categories/new">+ Nova</a>
-            <br><br>
-            <table class="table table-bordered">
-                <thead>
+    <div class="container">
+        <br>
+        <h1>Categorias</h1>
+        <br>
+        <a class="btn btn-info" href="/admin/categories/new">+ Nova</a>
+        <br><br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%categories.forEach(category=> { %>
                     <tr>
-                        <th>ID</th>
-                        <th>Título</th>
-                        <th>Slug</th>
-                        <th>Ações</th>
+                        <td>
+                            <%= category.id %>
+                        </td>
+                        <td>
+                            <%= category.title%>
+                        </td>
+                        <td>
+                            <%= category.slug %>
+                        </td>
+                        <td>
+                            <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
+                            <form method="POST" action="/admin/categories/delete" style="display: inline"
+                                onsubmit="deleteVerification(event, this)">
+                                <input type="hidden" name="id" value="<%= category.id %>">
+                                <button class="btn btn-danger">Deletar</button>
+                            </form>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    <%categories.forEach(category=> { %>
-                        <tr>
-                            <td>
-                                <%= category.id %>
-                            </td>
-                            <td>
-                                <%= category.title%>
-                            </td>
-                            <td>
-                                <%= category.slug %>
-                            </td>
-                            <td>
-                                <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
-                                <form method="POST" action="/admin/categories/delete" style="display: inline"
-                                    onsubmit="deleteVerification(event, this)">
-                                    <input type="hidden" name="id" value="<%= category.id %>">
-                                    <button class="btn btn-danger">Deletar</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <% }) %>
-                </tbody>
-            </table>
-        </div>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
 
-        <script>
-            function deleteVerification(event, form) {
-                event.preventDefault()
-                confirm('Você deseja realmente deletar esta categoria?')
-                if (confirm) {
-                    form.submit()
-                }
+    <script>
+        function deleteVerification(event, form) {
+            event.preventDefault()
+            let decision = confirm('Você deseja realmente deletar este artigo?')
+            if (decision) {
+                form.submit()
             }
-        </script>
-        <%- include ('../../partials/footer.ejs') %>
+        }
+    </script>
+<%- include ('../../partials/footer.ejs') %>
