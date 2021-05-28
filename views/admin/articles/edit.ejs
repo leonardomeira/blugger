@@ -1,0 +1,72 @@
+<%- include ('../../partials/head.ejs') %>
+    <%- include ('../../partials/navbar.ejs') %>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Editar artigo</h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="/admin/articles/update">
+                        <input type="hidden" value="<%= article.id %>" name="id">
+                        <label for="art-title">Título do Artigo</label>
+                        <input class="form-control" id="art-title" name="title" type="text"
+                            value="<%= article.title %>">
+                        <br>
+                        <label for="art-body">Corpo do Artigo</label>
+                        <textarea class="form-control" id="article" name="body" rows="25"></textarea>
+                        <label for="category-selector">Selecione uma categoria</label>
+                        <select id="category-selector" name="category" class="form-control">
+                            <% categories.forEach(category => { %>
+                                <% if (category.id == article.categoryId) { %>
+                                    <option value="<%= category.id%>" selected><%= category.title %></option>
+                                <% } else { %>
+                                    <option value="<%= category.id%>"><%= category.title %></option>
+                                <% } %>
+                            <% }) %>
+                        </select>
+                        <br>
+                        <button class="btn btn-info">Atualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" style="display: none">
+            <%- article.body %>
+        </div>
+
+        <%- include ('../../partials/footer.ejs') %>
+            </div>
+
+        <!-- TinyMCE - Text Editor -->
+        <script src="/js/tinymce/tinymce.min.js"></script>
+        <script>
+            tinymce.init({
+                language: 'pt_BR',
+                selector: "#article",
+                resize: false,
+                plugins: [
+                    `advlist
+                    autolink
+                    link
+                    image
+                    lists
+                    print
+                    preview
+                    hr
+                    searchreplace
+                    wordcount
+                    fullscreen
+                    insertdatetime
+                    media
+                    save
+                    table
+                    paste
+                    emoticons`
+                ],
+                init_instance_callback: () => {
+                    tinymce.get("article").setContent($("#content").html())
+                }
+            })
+        </script>
