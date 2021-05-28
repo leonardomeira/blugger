@@ -105,7 +105,7 @@ router.get('/articles/page/:num', (req, res) => {
         limit: 4,
         offset: offset,
         order: [
-            ['id', 'DESC']
+            ['id', 'desc']
         ]
     }).then(articles => {
 
