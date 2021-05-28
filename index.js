@@ -5,10 +5,12 @@ const connection = require('./database/database')
 //Controllers
 const categoriesController = require('./categories/CategoriesController')
 const articlesController = require('./articles/ArticlesController')
+const usersController = require('./users/UsersController')
 
 //Models
 const Article = require('./articles/Article')
 const Category = require('./categories/Category')
+const User = require('./users/User')
 
 app.set('view engine', 'ejs') // Setando a template engine
 
@@ -28,7 +30,7 @@ connection
         console.log(`An error has occured while trying to connect to the DB: ${error}`)
     })
 
-app.use('/', [categoriesController, articlesController])
+app.use('/', [categoriesController, articlesController, usersController])
 
 app.get('/', (req, res) => {
     Article.findAll({
