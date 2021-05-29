@@ -1,13 +1,10 @@
 <%- include ('../../partials/head.ejs') %>
 <%- include ('../../partials/homeNavbar.ejs') %>
 
-    <div class="container">
-        <br>
+    <div class="container mt-5 mb-5">
         <h1>Artigos</h1>
-        <br>
         <% result.articles.rows.forEach(article => { %>
-            <br>
-            <div class="card">
+            <div class="card mt-3 mb-3">
                 <div class="card-body">
                     <h3 style="display: flex; justify-content: space-between;">
                         <%= article.title %>
@@ -16,23 +13,21 @@
                 </div>
             </div>
         <% }) %>
-        <br>
-            <div class="row">
-                <div class="col col-12">
+        <div class="row mt-3">
+            <div class="col col-12">
 
-                    <% if (result.page == 1) { %>
-                        <span display="none"></span>
-                    <% } else if (result.page >= 1) { %>
-                        <a style="float: left" href="/articles/page/<%= result.page-1 %>" class="btn btn-info">< Anterior</a>
-                    <% } %>
+                <% if (result.page == 1) { %>
+                    <span display="none"></span>
+                <% } else if (result.page >= 1) { %>
+                    <a style="float: left" href="/articles/page/<%= result.page-1 %>" class="btn btn-info">< Anterior</a>
+                <% } %>
 
-                    <% if (result.next) { %>
-                        <a style="float: right" href="/articles/page/<%= result.page+1 %>" class="btn btn-info">Próximo ></a>
-                    <% } %>
+                <% if (result.next) { %>
+                    <a style="float: right" href="/articles/page/<%= result.page+1 %>" class="btn btn-info">Próximo ></a>
+                <% } %>
 
-                </div>
             </div>
-        
+        </div>  
     </div>
 
 <%- include ('../../partials/pageFooter.ejs') %>

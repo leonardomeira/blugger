@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const session = require('express-session')
 const connection = require('./database/database')
 
 //Controllers
@@ -13,6 +14,14 @@ const Category = require('./categories/Category')
 const User = require('./users/User')
 
 app.set('view engine', 'ejs') // Setando a template engine
+
+//Sessions
+app.use(session({
+    secret: "w56f1e4654fw6ef4wa6",
+    cookie: {
+        maxAge: 30000 // Tempo de expiração da sessão
+    }
+}))
 
 app.use(express.static('public')) // Setando a pasta de arq. estáticos
 

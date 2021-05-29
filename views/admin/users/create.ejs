@@ -2,7 +2,20 @@
 <%- include ('../../partials/navbar.ejs') %>
 
 <div class="container">
-    <h1>Em construção</h1>
+    <div class="card mt-5 mb-5">
+        <div class="card-header">
+            <h2>Registro de Usuário</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/users/create">
+                <label for="email">E-mail</label>
+                <input class="form-control mb-3" id="email" type="email" name="email">
+                <label for="password">Senha</label>
+                <input class="form-control mb-3" id="password" type="password" name="password">
+                <button type="submit" class="btn btn-info btn-block"><strong>Registrar</strong></button>
+            </form>
+        </div>
+    </div>
 </div>
 
 <%- include ('../../partials/pageFooter.ejs') %>

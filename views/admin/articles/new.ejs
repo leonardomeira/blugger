@@ -2,7 +2,7 @@
     <%- include ('../../partials/navbar.ejs') %>
 
 
-        <div class="container">
+        <div class="container mt-5 mb-5">
             <div class="card">
                 <div class="card-header">
                     <h1>Criar novo artigo</h1>
@@ -10,13 +10,11 @@
                 <div class="card-body">
                     <form method="POST" action="/admin/articles/save">
                         <label for="cat-title">Título</label>
-                        <input class="form-control" id="cat-title" name="title" type="text">
-                        <br>
+                        <input class="form-control mb-3" id="cat-title" name="title" type="text">
                         <label for="body">Corpo do artigo</label>
-                        <textarea class="form-control" id="article" name="body" rows="25"></textarea>
-                        <br>
+                        <textarea class="form-control mb-3" id="article" name="body" rows="25"></textarea>
                         <label for="selected-category">Categoria</label>
-                        <select class="form-control" name="category" id="">
+                        <select class="form-control mb-3" name="category" id="">
                             <option selected="selected">Selecione uma categoria</option>
                             <% categories.forEach(category=> { %>
                                 <option value="<%= category.id %>">
@@ -24,7 +22,6 @@
                                 </option>
                                 <% }) %>
                         </select>
-                        <br>
                         <button class="btn btn-info">Cadastrar</button>
                     </form>
                 </div>

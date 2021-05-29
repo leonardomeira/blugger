@@ -1,7 +1,7 @@
 <%- include ('../../partials/head.ejs') %>
     <%- include ('../../partials/navbar.ejs') %>
 
-        <div class="container">
+        <div class="container mt-5 mb-5">
             <div class="card">
                 <div class="card-header">
                     <h1>Editar artigo</h1>
@@ -10,13 +10,12 @@
                     <form method="POST" action="/admin/articles/update">
                         <input type="hidden" value="<%= article.id %>" name="id">
                         <label for="art-title">Título do Artigo</label>
-                        <input class="form-control" id="art-title" name="title" type="text"
+                        <input class="form-control mb-3" id="art-title" name="title" type="text"
                             value="<%= article.title %>">
-                        <br>
                         <label for="art-body">Corpo do Artigo</label>
-                        <textarea class="form-control" id="article" name="body" rows="25"></textarea>
+                        <textarea class="form-control mb-3" id="article" name="body" rows="25"></textarea>
                         <label for="category-selector">Selecione uma categoria</label>
-                        <select id="category-selector" name="category" class="form-control">
+                        <select id="category-selector mb-3" name="category" class="form-control">
                             <% categories.forEach(category => { %>
                                 <% if (category.id == article.categoryId) { %>
                                     <option value="<%= category.id%>" selected><%= category.title %></option>
@@ -25,7 +24,6 @@
                                 <% } %>
                             <% }) %>
                         </select>
-                        <br>
                         <button class="btn btn-info">Atualizar</button>
                     </form>
                 </div>
@@ -37,7 +35,6 @@
         </div>
 
         <%- include ('../../partials/footer.ejs') %>
-            </div>
 
         <!-- TinyMCE - Text Editor -->
         <script src="/js/tinymce/tinymce.min.js"></script>
