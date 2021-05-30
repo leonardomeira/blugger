@@ -18,13 +18,13 @@ router.post('/admin/categories/new/save', (req, res) => {
             res.redirect('/admin/categories')
         })
     } else {
-        res.redirect('/admin/categories/new')
+        res.redirect('/admin/categories/new', {req: req})
     }
 })
 
 router.get('/admin/categories', (req, res) => {
     Category.findAll().then(categories => {
-        res.render('admin/categories/all', { categories: categories })
+        res.render('admin/categories/all', { categories: categories, req: req })
     })
 })
 
@@ -58,7 +58,7 @@ router.get('/admin/categories/edit/:id', (req, res) => {
 
     Category.findByPk(id).then(category => {
         if (category != undefined) {
-            res.render('admin/categories/edit', { category: category })
+            res.render('admin/categories/edit', { category: category, req: req})
         } else {
             res.redirect('/admin/categories')
         }
