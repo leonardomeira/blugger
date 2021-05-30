@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const User = require('./User')
+const session = require('express-session')
 
 router.get('/admin/users', (req, res) => {
     User.findAll().then(users => {
@@ -9,11 +10,11 @@ router.get('/admin/users', (req, res) => {
     })
 })
 
-router.get('/admin/users/create', (req, res) => {
-    res.render('admin/users/create')
+router.get('/admin/users/register', (req, res) => {
+    res.render('admin/users/register')
 })
 
-router.post('/users/create', (req, res) => {
+router.post('/users/register', (req, res) => {
     let email = req.body.email
     let password = req.body.password
 
@@ -40,6 +41,36 @@ router.post('/users/create', (req, res) => {
     })
 
     
+})
+
+router.get('/login', (req, res) => {
+    res.render('admin/users/login')
+})
+
+router.post('/authenticate', (req, res) => {
+    let email = req.body.email
+    let password = req.body.password
+
+    User.findOne({
+        where: {
+            email: email
+        }
+    }).then(user => {
+        if (user != undefined) {
+            let correct = bcrypt.compareSync(password, user.password)
+
+            if (correct) {
+                req.session.user = {
+                    id: user.id,
+                    email: user.email
+                }
+            } else {
+                res.redirect('/login')
+            }
+        } else {
+            res.redirect('/login')
+        }
+    })
 })
 
 module.exports = router

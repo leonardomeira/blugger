@@ -19,11 +19,11 @@ app.set('view engine', 'ejs') // Setando a template engine
 app.use(session({
     secret: "w56f1e4654fw6ef4wa6",
     cookie: {
-        maxAge: 30000 // Tempo de expiração da sessão
+        maxAge: 30000000 // Tempo de expiração da sessão
     }
 }))
 
-app.use(express.static('public')) // Setando a pasta de arq. estáticos
+app.use(express.static('public')) // Pasta de arq. estáticos
 
 //Embedded express bodyparser
 app.use(express.urlencoded({ extended: false }))
@@ -42,11 +42,20 @@ connection
 app.use('/', [categoriesController, articlesController, usersController])
 
 app.get('/session', (req, res) => {
-
+    req.session.treinamento = 'Training'
+    req.session.user = {
+        username: "leomeira",
+        email: 'teste@email.com',
+        id: 1
+    }
+    res.send('Sessão gerada')
 })
 
 app.get('/leitura', (req, res) => {
-    
+    res.json({
+        treinamento: req.session.treinamento,
+        user: req.session.user
+    })
 })
 
 app.get('/', (req, res) => {
