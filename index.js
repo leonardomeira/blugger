@@ -66,7 +66,7 @@ app.get('/', (req, res) => {
         limit: 4,
     }).then(articles => {
         Category.findAll().then(categories => {
-            res.render('index', { articles: articles, categories: categories })
+            res.render('index', { articles: articles, categories: categories, req: req })
         })
     })
 })

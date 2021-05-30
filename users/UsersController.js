@@ -2,19 +2,26 @@ const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 const User = require('./User')
+const Category = require('../categories/Category')
 const session = require('express-session')
 
-router.get('/admin/users', (req, res) => {
+const MIDadminAuth = require('../middlewares/adminAuth')
+
+router.get('/admin/users', MIDadminAuth, (req, res) => {
     User.findAll().then(users => {
-        res.render('admin/users/all', {users})
+        Category.findAll().then(categories => {
+            res.render('admin/users/all', {users, req, categories})
+        })
     })
 })
 
-router.get('/admin/users/register', (req, res) => {
-    res.render('admin/users/register')
+router.get('/register', (req, res) => {
+    Category.findAll().then(categories => {
+        res.render('/users/register', {req: req, categories: categories})
+    })
 })
 
-router.post('/users/register', (req, res) => {
+router.post('/register', (req, res) => {
     let email = req.body.email
     let password = req.body.password
 
@@ -39,12 +46,16 @@ router.post('/users/register', (req, res) => {
             res.redirect('/admin/users')
         }
     })
-
-    
 })
 
 router.get('/login', (req, res) => {
-    res.render('admin/users/login')
+    if (req.session.user == undefined) {
+        Category.findAll().then(categories => {
+            res.render('admin/users/login', {categories, req: req})
+        })
+    } else {
+        res.redirect('/')
+    }
 })
 
 router.post('/authenticate', (req, res) => {
@@ -64,6 +75,7 @@ router.post('/authenticate', (req, res) => {
                     id: user.id,
                     email: user.email
                 }
+                res.redirect('/admin/articles')
             } else {
                 res.redirect('/login')
             }
@@ -71,6 +83,11 @@ router.post('/authenticate', (req, res) => {
             res.redirect('/login')
         }
     })
+})
+
+router.get('/logout', (req, res) => {
+    req.session.user = undefined
+    res.redirect('/')
 })
 
 module.exports = router

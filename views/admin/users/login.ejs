@@ -1,7 +1,7 @@
 <%- include ('../../partials/head.ejs') %>
-<%- include ('../../partials/navbar.ejs') %>
+<%- include ('../../partials/homeNavbar.ejs') %>
 
-<div class="container">
+<div class="container" style="width: 40%">
     <div class="card mt-5 mb-5">
         <div class="card-header">
             <h2>Entrar no Blugger</h2>
@@ -12,7 +12,9 @@
                 <input class="form-control mb-3" id="email" type="email" name="email">
                 <label for="password">Senha</label>
                 <input class="form-control mb-3" id="password" type="password" name="password">
-                <button type="submit" class="btn btn-info btn-block"><strong>Login</strong></button>
+                <button type="submit" class="btn btn-info btn-block mb-5"><strong>Login</strong></button>
+                <h4 class="mb-3">Novo por aqui?</h4>
+                <a style="display: block;" class="btn btn-success" href="/register"><strong>Registrar-se</strong></a>
             </form>
         </div>
     </div>
