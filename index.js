@@ -110,6 +110,6 @@ app.get('/category/:slug', (req, res) => {
     })
 })
 
-app.listen(4000, () => {
+app.listen(80, () => {
     console.log('Server is running')
 })
