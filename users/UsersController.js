@@ -17,7 +17,7 @@ router.get('/admin/users', MIDadminAuth, (req, res) => {
 
 router.get('/register', (req, res) => {
     Category.findAll().then(categories => {
-        res.render('/users/register', {req: req, categories: categories})
+        res.render('admin/users/register', {req: req, categories: categories})
     })
 })
 
