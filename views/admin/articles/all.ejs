@@ -31,11 +31,11 @@
                             <%= article.category.title %>
                         </td>
                         <td>
-                            <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning">Editar</a>
+                            <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning text-light" title="Editar"><i class="fas fa-pen-square"></i></a>
                             <form method="POST" action="/admin/articles/delete" style="display: inline"
                                 onsubmit="deleteVerification(event, this)">
                                 <input type="hidden" name="id" value="<%= article.id %>">
-                                <button class="btn btn-danger">Deletar</button>
+                                <button class="btn btn-danger" title="Deletar"><i class="fas fa-minus-square"></i></button>
                             </form>
                         </td>
                     </tr>

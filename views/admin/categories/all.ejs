@@ -27,11 +27,11 @@
                             <%= category.slug %>
                         </td>
                         <td>
-                            <a href="/admin/categories/edit/<%= category.id %>" class="btn btn-warning">Editar</a>
+                            <a href="/admin/categories/edit/<%= category.id %>" title="Editar" class="btn btn-warning text-light"><i class="fas fa-pen-square"></i></a>
                             <form method="POST" action="/admin/categories/delete" style="display: inline"
                                 onsubmit="deleteVerification(event, this)">
                                 <input type="hidden" name="id" value="<%= category.id %>">
-                                <button class="btn btn-danger">Deletar</button>
+                                <button class="btn btn-danger" title="Deletar"><i class="fas fa-minus-square"></i></button>
                             </form>
                         </td>
                     </tr>
