@@ -1,7 +1,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <a class="navbar-brand" href="/"><img src="img/logo.png" alt="Blugger"></a>
+        <a class="navbar-brand" href="/"><img src="/img/logo.png" alt="Blugger"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,7 +31,7 @@
                     <a class="btn btn-info btn-outline-light mr-2" href="/login">Login</a>
 		    <a class="btn btn-success" href="/register">Registrar</a>
                 <% } else { %>
-                    <p class="text-light mr-2 mb-0">Bem-vindo, <strong>Usuário!</strong></p>
+                    <p class="text-light mr-2 mb-0">Bem-vindo, <strong><%= req.session.user.username %></strong></p>
                     <a class="btn btn-info btn-outline-light" href="/logout">Sair</a>
                 <% } %>
             </div>

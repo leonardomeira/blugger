@@ -22,8 +22,7 @@ app.use(session({
         maxAge: 30000000 // Tempo de expiração da sessão
     }
 }))
-
-app.use(express.static('public')) // Pasta de arq. estáticos
+app.use(express.static(__dirname + "/public")) // Pasta de arq. estáticos
 
 //Embedded express bodyparser
 app.use(express.urlencoded({ extended: false }))

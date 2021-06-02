@@ -22,6 +22,7 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
+    let username = req.body.username
     let email = req.body.email
     let password = req.body.password
 
@@ -35,6 +36,7 @@ router.post('/register', (req, res) => {
             let hash = bcrypt.hashSync(password, salt)
 
             User.create({
+                username: username,
                 email: email,
                 password: hash
             }).then(() => {
@@ -73,6 +75,7 @@ router.post('/authenticate', (req, res) => {
             if (correct) {
                 req.session.user = {
                     id: user.id,
+                    username: user.username,
                     email: user.email
                 }
                 res.redirect('/admin/articles')
