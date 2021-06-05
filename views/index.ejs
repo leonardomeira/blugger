@@ -1,17 +1,33 @@
 <%- include ('partials/head.ejs') %>
 <%- include ('partials/homeNavbar.ejs') %>
-
     <div class="container pt-5 pb-5">
-        <div class="jumbotron">
-            <h1 class="display-4">Blugger</h1>
-            <p class="lead">O portal de atigos aleatórios</p>
-        </div>
+        
+        <% if (latestArticle) { %>
+            <div class="jumbotron p-4">
+                <h4 class="text-secondary">| Artigo mais recente</h4>
+                <a href='/<%= latestArticle[0].slug %>'><h1 class="display-4"><%= latestArticle[0].title %></h1></a>
+            </div>
+        <% } else { %>
+            <h1>Categoria: <%= category.title %></h1>
+        <% } %>
+
+        <% if (noArticlesFound) { %>
+            <div class="card p-4">
+                <h3>Esta categoria ainda não possui artigos :(</h3>
+                <a href="/"><< Voltar à página inicial</a>
+            </div>
+        <% } %>
+
         <% articles.forEach(article => { %>
             <div class="card mt-3">
                 <div class="card-body">
                     <h3><%= article.title %></h3>
                     <div class="d-flex justify-content-between">
-                        <p class="text-secondary">Categoria: <%= article.categoryId %></p>
+                        <% categories.forEach(category => { %>
+                            <% if (category.id == article.categoryId) {  %>
+                                <p class="text-secondary"><%= category.title %></p>
+                            <% } %>
+                        <% }) %>
                         <a href="/<%= article.slug %>">Ler artigo >></a>
                     </div>
                 </div>

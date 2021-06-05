@@ -1,39 +1,38 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-info">
-        <a class="navbar-brand" href="/"><img src="/img/logo.png" alt="Blugger"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        
+        <div>
+            <a class="navbar-brand" href="/"><img src="/img/logo.png" alt="Blugger"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categorias
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <% categories.forEach(category => { %>
-                            <a class="dropdown-item" href="/category/<%= category.slug %>"><%= category.title %></a>
-                        <% }) %>
-                    </div>
-                </li>
-            </ul>
-                
-            <form class="form-inline my-2 my-lg-0 mr-2">
-                <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search">
-                <button class="btn btn-outline-info btn-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
-            </form>
-            <div class="d-flex align-items-center">
-                <% if (req.session.user == undefined ) { %>
-                    <a class="btn btn-info btn-outline-light mr-2" href="/login">Login</a>
-		    <a class="btn btn-success" href="/register">Registrar</a>
-                <% } else { %>
-                    <p class="text-light mr-2 mb-0">Bem-vindo, <strong><%= req.session.user.username %></strong></p>
-                    <a class="btn btn-info btn-outline-light" href="/logout">Sair</a>
-                <% } %>
+            
+        </div>
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+            <span></span>
+
+            <div style="display: flex">
+                <form class="form-inline my-2 my-lg-0 mr-2">
+                    <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search">
+                    <button class="btn btn-outline-info btn-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="d-flex align-items-center">
+                    <% if (req.session.user == undefined ) { %>
+                        <a class="btn btn-info btn-outline-light mr-2" href="/login">Login</a>
+                <a class="btn btn-success" href="/register">Registrar</a>
+                    <% } else { %>
+                        <p class="text-light mr-2 mb-0">Bem-vindo, <strong><%= req.session.user.username %></strong></p>
+                        <a class="btn btn-info btn-outline-light" href="/logout">Sair</a>
+                    <% } %>
             </div>
         </div>
     </nav>
+    <div class="categories" style="height: 40px; background: #00BBDD; display: flex; align-items: center; justify-content: space-around;">
+        <% categories.forEach(category => { %>
+            <a class="nav-cat-link" href="/category/<%= category.slug %>"><%= category.title %></a>
+        <% }) %>
+    </div>

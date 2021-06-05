@@ -40,16 +40,6 @@ connection
 
 app.use('/', [categoriesController, articlesController, usersController])
 
-app.get('/session', (req, res) => {
-    req.session.treinamento = 'Training'
-    req.session.user = {
-        username: "leomeira",
-        email: 'teste@email.com',
-        id: 1
-    }
-    res.send('Sessão gerada')
-})
-
 app.get('/leitura', (req, res) => {
     res.json({
         treinamento: req.session.treinamento,
@@ -58,14 +48,27 @@ app.get('/leitura', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-    Article.findAll({
+    Article.findAll({ //Find most recent articles and show them in the index
         order: [
             ['id', 'DESC']
         ],
         limit: 4,
     }).then(articles => {
-        Category.findAll().then(categories => {
-            res.render('index', { articles: articles, categories: categories, req: req })
+        Article.findAll({ //Get latest registered article from database to spotlight
+            limit: 1,
+            order: [
+                ['id', 'DESC']
+            ]
+        }).then(latestArticle => {
+            Category.findAll().then(categories => {
+                res.render('index', {
+                    articles: articles,
+                    latestArticle: latestArticle,
+                    categories: categories,
+                    req: req,
+                    noArticlesFound: false
+                })
+            })
         })
     })
 })
@@ -99,7 +102,26 @@ app.get('/category/:slug', (req, res) => {
     }).then(category => {
         if (category != undefined) {
             Category.findAll().then(categories => {
-                res.render('index', {articles: category.articles, categories})
+                if (category.articles.length != 0) {
+                    res.render('index', {
+                        category: category,
+                        articles: category.articles,
+                        categories: categories,
+                        req: req,
+                        latestArticle: null,
+                        noArticlesFound: false
+                    })
+                    console.log(category.articles.length)
+                } else {
+                    res.render('index', {
+                        category: category,
+                        articles: category.articles,
+                        categories: categories,
+                        req: req,
+                        latestArticle: null,
+                        noArticlesFound: true
+                    })
+                }
             })
         } else {
             res.redirect('/')
