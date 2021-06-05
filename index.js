@@ -109,7 +109,7 @@ app.get('/category/:slug', (req, res) => {
                         categories: categories,
                         req: req,
                         latestArticle: null,
-                        noArticlesFound: false
+                        noArticlesFound: false 
                     })
                     console.log(category.articles.length)
                 } else {
